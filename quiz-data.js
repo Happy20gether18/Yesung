@@ -102,35 +102,56 @@ window.QUIZ_DATA = Object.freeze({
       image: "images/20.png",
       answer: "いま会いにゆきます 〜IF you〜",
       options: ["いま会いにゆきます 〜IF you〜", "雨のち晴れの空の色", "束の间の恋", "咲き夸る时を待つのは"]
+    },
+    {
+      image: "images/21.png",
+      answer: "Beautiful Night",
+      options: ["Beautiful Night", "Beautiful Paradox", "Together", "No More Love"]
+    },
+    {
+      image: "images/22.png",
+      answer: "MONOLOGUE",
+      options: ["My Dear", "MONOLOGUE", "Carpet", "Curtain"]
+    },
+    {
+      image: "images/23.png",
+      answer: "Darling U",
+      options: ["Slide Away", "My Dear", "Darling U", "Spring in Me"]
+    },
+    {
+      image: "images/24.png",
+      answer: "Curtain",
+      options: ["Carpet", "Floral Sense", "Phantom Pain", "Curtain"]
+    },
+    {
+      image: "images/25.png",
+      answer: "Slide Away",
+      options: ["Slide Away", "No More Love", "Splash", "Easy"]
+    },
+    {
+      image: "images/26.png",
+      answer: "もしかしたら仆の物语 ～そして仆ら～",
+      options: ["雨のち晴れの空の色", "もしかしたら仆の物语 ～そして仆ら～", "いま会いにゆきます 〜IF you〜", "咲き夸る时を待つのは"]
+    },
+    {
+      image: "images/27.png",
+      answer: "Carpet",
+      options: ["Curtain", "My Dear", "Carpet", "Darling U"]
+    },
+    {
+      image: "images/28.png",
+      answer: "My Dear",
+      options: ["Darling U", "MONOLOGUE", "Small Things", "My Dear"]
+    },
+    {
+      image: "images/29.png",
+      answer: "Still Standing",
+      options: ["Still Standing", "春天的阵雨", "Floral Sense", "Scented Things"]
+    },
+    {
+      image: "images/30.png",
+      answer: "Hibernation 冬眠",
+      options: ["束の间の恋", "Hibernation 冬眠", "雨のち晴れの空の色", "いま会いにゆきます 〜IF you〜"]
     }
   ]
 });
-
-// 每次点击“开始答题 / 再玩一次”时，随机题目顺序及 A–D 位置。
-// 只移动完整题目对象和现有四个选项；answer 字符串不变，因此正确答案始终存在。
-(() => {
-  const shuffleInPlace = list => {
-    for (let i = list.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [list[i], list[j]] = [list[j], list[i]];
-    }
-  };
-  const bgm = new Audio("audio/Easy.mp3");
-  bgm.loop = true;
-  bgm.volume = 0.06;
-
-  // 页面打开时先尝试播放；若浏览器拦截自动播放，点击“开始答题”时会再次播放。
-  window.addEventListener("DOMContentLoaded", () => {
-    bgm.play().catch(() => {});
-  });
-
-  document.addEventListener("click", event => {
-    const button = event.target.closest?.(".primary");
-    if (!button) return;
-    shuffleInPlace(window.QUIZ_DATA.questions);
-    window.QUIZ_DATA.questions.forEach(question => shuffleInPlace(question.options));
-    bgm.currentTime = 0;
-    bgm.play().catch(() => {});
-  }, true);
-
-})();
