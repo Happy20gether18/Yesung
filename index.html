@@ -37,7 +37,7 @@
     const music={basic:new Audio(phases.basic.music),advanced:new Audio(phases.advanced.music)};
     Object.values(music).forEach(track=>{track.loop=true;track.volume=.06});
     let phaseKey="basic",questions=[],index=0,score=0,time=data.secondsPerQuestion,timer=null,locked=false,audio=null,basicScore=null;
-    const trialQuestion={image:"images/00.webp",answer:"咲き誇る時を待つのは",options:["咲き誇る時を待つのは","雨のち晴れの空の色","束の間の恋","いま会いにゆきます 〜IF you〜"]};
+    const trialQuestion={image:"images/00.webp?v=20260820",answer:"咲き誇る時を待つのは",options:["咲き誇る時を待つのは","雨のち晴れの空の色","束の間の恋","いま会いにゆきます 〜IF you〜"]};
     const validate=()=>data.questions.forEach((q,i)=>{if(q.options.length!==4)throw Error(`第 ${i+1} 题不是四个选项`);if(!q.options.includes(q.answer))throw Error(`第 ${i+1} 题选项不包含答案`);if(new Set(q.options).size!==4)throw Error(`第 ${i+1} 题有重复选项`)});
     const shuffle=list=>{const result=[...list];for(let i=result.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[result[i],result[j]]=[result[j],result[i]]}return result};
     function tick(){if(!audio)return;const now=audio.currentTime,osc=audio.createOscillator(),gain=audio.createGain();osc.type="sine";osc.frequency.setValueAtTime(950,now);osc.frequency.exponentialRampToValueAtTime(520,now+.055);gain.gain.setValueAtTime(.0001,now);gain.gain.exponentialRampToValueAtTime(.17,now+.008);gain.gain.exponentialRampToValueAtTime(.0001,now+.09);osc.connect(gain).connect(audio.destination);osc.start(now);osc.stop(now+.1)}
